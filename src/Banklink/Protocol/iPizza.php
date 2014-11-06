@@ -37,8 +37,8 @@ class iPizza implements ProtocolInterface
      * @param string  $sellerId
      * @param string  $sellerName
      * @param integer $sellerAccNum
-     * @param string  $privateKey    Private key location
-     * @param string  $publicKey     Public key (certificate) location
+     * @param string  $privateKey    Private key location or content
+     * @param string  $publicKey     Public key (certificate) location or content
      * @param string  $endpointUrl
      * @param string  $version
      * @param boolean $mbStrlen      Use mb_strlen for string length calculation?
@@ -161,7 +161,11 @@ class iPizza implements ProtocolInterface
     {
         $hash = $this->generateHash($data);
 
-        $keyId = openssl_get_privatekey('file://'.$this->privateKey);
+        $privateKey = $this->privateKey;
+        if (is_file($this->privateKey)) {
+            $privateKey = 'file://' . $privateKey;
+        }
+        $keyId = openssl_get_privatekey($privateKey);
         openssl_sign($hash, $signature, $keyId);
         openssl_free_key($keyId);
 
@@ -182,7 +186,11 @@ class iPizza implements ProtocolInterface
     {
         $hash = $this->generateHash($responseData, $encoding);
 
-        $keyId = openssl_pkey_get_public('file://'.$this->publicKey);
+        $publicKey = $this->publicKey;
+        if (is_file($this->publicKey)) {
+            $publicKey = 'file://' . $publicKey;
+        }
+        $keyId = openssl_pkey_get_public($publicKey);
         $result = openssl_verify($hash, base64_decode($responseData[Fields::SIGNATURE]), $keyId);
         openssl_free_key($keyId);
 
