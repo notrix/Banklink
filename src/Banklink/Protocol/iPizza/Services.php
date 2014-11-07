@@ -38,10 +38,8 @@ final class Services
                     Fields::ORDER_ID,
                     Fields::SUM,
                     Fields::CURRENCY,
-                    Fields::SELLER_BANK_ACC,
-                    Fields::SELLER_NAME,
                     Fields::ORDER_REFERENCE,
-                    Fields::DESCRIPTION
+                    Fields::DESCRIPTION,
                 );
             case Services::PAYMENT_SUCCESS:
                 return array(
