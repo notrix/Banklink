@@ -30,7 +30,7 @@ class SEBTest extends \PHPUnit_Framework_TestCase
     public function testPreparePaymentRequest()
     {
         $expectedRequestData = array(
-          'VK_SERVICE'  => '1001',
+          'VK_SERVICE'  => '1002',
           'VK_VERSION'  => '008',
           'VK_SND_ID'   => 'uid258629',
           'VK_STAMP'    => '1',
@@ -44,7 +44,7 @@ class SEBTest extends \PHPUnit_Framework_TestCase
           'VK_CANCEL'   => 'http://www.google.com',
           'VK_LANG'     => 'ENG',
           'VK_CHARSET'  => 'UTF-8',
-          'VK_MAC'      => 'g4SMbCZEbxSXF7qx8ggcRHTyWOx4Dqkb0eM6atoEC5A12SAlWDgIw5TnB319KtreUcEubrjZz9z4NQgVrSieoOX9yr3G7ciLopGaoajAr6RA9RTYP0QDoArTuDKBqFwRT6D+erTggu9Dz3G/dQKlL9SCQtUxV6yCHp0cLgzYmtUGXoC7x4WnP1NuJZwlBnJI3acsCNyw5gTnEHle0Xd2OElH84aKlItqSsPbFirWhZRLfLy8uyiwSseChnTnDXCINyFLypHNTvvn+DaE8m+nyDkL4Jt3L2rciYkLPuoXSY3JGXTzjS7TkpOPUEtBQZ65ZylltduAeknxocvSZYUskA=='
+          'VK_MAC'      => 'SRXrsL3ek9dulUyDRHmg/2Wxc2GkvzXGl7/yJ2M6liRfTBN1pQ3KWYixiNqWGGQWTXo3uAVhqdIDf7Fxf/UT6nJpkq4LcstkSH14Y6T87mtMFaCvLuy9tJzS81197sm0qScAEkmxciWXbYy5hurSdikjQDtdN3W3L750t42ps8i9+EP15wOUq3yBDgal8Z7p2IGaGitsZkzCGlIeOOeD2xGotIXRYvpzsKbUcFj67YgOJSLKU1sy7DpVf09iuhx34g7IZZ2xwbyKYdf3VKvAoy6p2iYvlU3JRPTPpxP/s+1tYpAcXvMZKOye9BJNi9bKRgusN9AFAaKs0hPMtjOJnA=='
         );
 
         $request = $this->seb->preparePaymentRequest(1, 100, 'Test payment', 'ENG', 'EUR');

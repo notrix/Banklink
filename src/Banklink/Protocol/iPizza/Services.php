@@ -11,7 +11,7 @@ namespace Banklink\Protocol\iPizza;
 final class Services
 {
     // Requests
-    const PAYMENT_REQUEST      = '1001';
+    const PAYMENT_REQUEST      = '1002';
     const AUTHENTICATE_REQUEST = '3001';
 
     // Responses
