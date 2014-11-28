@@ -20,6 +20,7 @@ class iPizza implements ProtocolInterface
 {
     protected $publicKey;
     protected $privateKey;
+    protected $privateKeyPass;
 
     protected $sellerId;
     protected $sellerName;
@@ -37,13 +38,14 @@ class iPizza implements ProtocolInterface
      * @param string  $sellerId
      * @param string  $sellerName
      * @param integer $sellerAccNum
-     * @param string  $privateKey    Private key location or content
-     * @param string  $publicKey     Public key (certificate) location or content
+     * @param string  $privateKey     Private key location or content
+     * @param string  $privateKeyPass Private key password
+     * @param string  $publicKey      Public key (certificate) location or content
      * @param string  $endpointUrl
      * @param string  $version
-     * @param boolean $mbStrlen      Use mb_strlen for string length calculation?
+     * @param boolean $mbStrlen       Use mb_strlen for string length calculation?
      */
-    public function __construct($sellerId, $sellerName, $sellerAccNum, $privateKey, $publicKey, $endpointUrl, $mbStrlen = false, $version = '008')
+    public function __construct($sellerId, $sellerName, $sellerAccNum, $privateKey, $privateKeyPass, $publicKey, $endpointUrl, $mbStrlen = false, $version = '008')
     {
         $this->sellerId            = $sellerId;
         $this->sellerName          = $sellerName;
@@ -52,6 +54,7 @@ class iPizza implements ProtocolInterface
 
         $this->publicKey           = $publicKey;
         $this->privateKey          = $privateKey;
+        $this->privateKeyPass      = $privateKeyPass;
 
         $this->mbStrlen            = $mbStrlen;
 
@@ -165,7 +168,7 @@ class iPizza implements ProtocolInterface
         if (is_file($this->privateKey)) {
             $privateKey = 'file://' . $privateKey;
         }
-        $keyId = openssl_get_privatekey($privateKey);
+        $keyId = openssl_get_privatekey($privateKey, $this->privateKeyPass);
         openssl_sign($hash, $signature, $keyId);
         openssl_free_key($keyId);
 
